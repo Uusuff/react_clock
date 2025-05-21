@@ -50,11 +50,16 @@ export class App extends React.Component<{}, AppState> {
   }
   handleRightClick = (event: MouseEvent) => {
     event.preventDefault();
-    this.setState({ hasClock: false });
+    if (this.state.hasClock) {
+      this.setState({ hasClock: false });
+    } 
   };
 
   handleLeftClick = () => {
-    this.setState({ hasClock: true });
+    if (!this.state.hasClock) {
+      this.setState({ hasClock: true });
+    }
+
   };
 
   render() {
