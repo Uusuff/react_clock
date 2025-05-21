@@ -12,12 +12,12 @@ export class Clock extends React.Component<ClockProps, ClockState> {
   timerId: number | null = null;
 
   state: ClockState = {
-    time: new Date().toLocaleTimeString(),
+    time: new Date().toUTCString().slice(-12, -4),
   };
 
   componentDidMount() {
     this.timerId = window.setInterval(() => {
-      const time = new Date().toLocaleTimeString();
+      const time = new Date().toUTCString().slice(-12, -4);
 
       this.setState({ time });
 

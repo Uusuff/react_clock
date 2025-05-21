@@ -30,10 +30,12 @@ export class App extends React.Component<{}, AppState> {
     document.addEventListener('contextmenu', this.handleRightClick);
     document.addEventListener('click', this.handleLeftClick);
   }
+
   componentDidUpdate(_prevProps: {}, prevState: AppState) {
     const nameChanged = prevState.clockName !== this.state.clockName;
     const wasVisible = prevState.hasClock;
     const isVisible = this.state.hasClock;
+
     if (nameChanged && wasVisible && isVisible) {
       // eslint-disable-next-line no-console
       console.warn(
@@ -41,25 +43,27 @@ export class App extends React.Component<{}, AppState> {
       );
     }
   }
+
   componentWillUnmount() {
     if (this.nameTimerId !== null) {
       clearInterval(this.nameTimerId);
     }
+
     document.removeEventListener('contextmenu', this.handleRightClick);
     document.removeEventListener('click', this.handleLeftClick);
   }
+
   handleRightClick = (event: MouseEvent) => {
     event.preventDefault();
     if (this.state.hasClock) {
       this.setState({ hasClock: false });
-    } 
+    }
   };
 
   handleLeftClick = () => {
     if (!this.state.hasClock) {
       this.setState({ hasClock: true });
     }
-
   };
 
   render() {
